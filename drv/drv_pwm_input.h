@@ -49,7 +49,7 @@ typedef struct
 
 /*_____ M A C R O S ________________________________________________________*/
 
-#define ENABLE_LOG_CAPTURE
+// #define ENABLE_LOG_CAPTURE
 
 /*_____ F U N C T I O N S __________________________________________________*/
 
