@@ -65,7 +65,6 @@ static unsigned char pwm_out_is_enabled(unsigned char ch)
     return 1U;
 }
 
-
 void pwm_out_init_from_hw(unsigned long enable_mask , unsigned char master_channel)
 {
     unsigned char ch;

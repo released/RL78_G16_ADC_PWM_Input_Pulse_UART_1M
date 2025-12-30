@@ -69,9 +69,9 @@ void R_Config_UART2_Create(void)
     /* Set INTST2 low priority */
     STPR12 = 1U;
     STPR02 = 1U;
-    /* Set INTSR2 low priority */
-    SRPR12 = 1U;
-    SRPR02 = 1U;
+    /* Set INTSR2 high priority */
+    SRPR12 = 0U;
+    SRPR02 = 0U;
     /* Set INTSRE2 low priority */
     SREPR12 = 1U;
     SREPR02 = 1U;

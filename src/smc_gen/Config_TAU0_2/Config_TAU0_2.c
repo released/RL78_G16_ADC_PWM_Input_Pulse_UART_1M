@@ -53,7 +53,7 @@ Global variables and functions
 void R_Config_TAU0_2_Create(void)
 {
     TPS0 &= _FF0F_TAU_CKM1_CLEAR;
-    TPS0 |= _0000_TAU_CKM1_FCLK_0;
+    TPS0 |= _0040_TAU_CKM1_FCLK_4;
     TT0 |= (_0080_TAU_CH7_STOP_TRG_ON | _0040_TAU_CH6_STOP_TRG_ON | _0020_TAU_CH5_STOP_TRG_ON | 
            _0008_TAU_CH3_STOP_TRG_ON | _0004_TAU_CH2_STOP_TRG_ON);
     TMMK02 = 1U;    /* disable INTTM02 interrupt */
@@ -84,7 +84,7 @@ void R_Config_TAU0_2_Create(void)
     /* Channel 2 is used as master channel for PWM output function */
     TMR02 = _8000_TAU_CLOCK_SELECT_CKM1 | _0000_TAU_CLOCK_MODE_CKS | _0800_TAU_COMBINATION_MASTER | 
             _0000_TAU_TRIGGER_SOFTWARE | _0001_TAU_MODE_PWM_MASTER;
-    TDR02 = _063F_TAU_TDR02_VALUE;
+    TDR02 = _270F_TAU_TDR02_VALUE;
     TOM0 &= (uint16_t)~_0004_TAU_CH2_SLAVE_OUTPUT;
     TOL0 &= (uint16_t)~_0004_TAU_CH2_OUTPUT_LEVEL_L;
     TO0 &= (uint16_t)~_0004_TAU_CH2_OUTPUT_VALUE_1;
@@ -92,7 +92,7 @@ void R_Config_TAU0_2_Create(void)
     /* Channel 3 is used as slave channel for PWM output function */
     TMR03 = _8000_TAU_CLOCK_SELECT_CKM1 | _0000_TAU_CLOCK_MODE_CKS | _0000_TAU_COMBINATION_SLAVE | 
             _0400_TAU_TRIGGER_MASTER_INT | _0009_TAU_MODE_PWM_SLAVE;
-    TDR03 = _0640_TAU_TDR03_VALUE;
+    TDR03 = _2710_TAU_TDR03_VALUE;
     TOM0 |= _0008_TAU_CH3_SLAVE_OUTPUT;
     TOL0 &= (uint16_t)~_0008_TAU_CH3_OUTPUT_LEVEL_L;
     TO0 &= (uint16_t)~_0008_TAU_CH3_OUTPUT_VALUE_1;
@@ -100,7 +100,7 @@ void R_Config_TAU0_2_Create(void)
     /* Channel 5 is used as slave channel for PWM output function */
     TMR05 = _8000_TAU_CLOCK_SELECT_CKM1 | _0000_TAU_CLOCK_MODE_CKS | _0000_TAU_COMBINATION_SLAVE | 
             _0400_TAU_TRIGGER_MASTER_INT | _0009_TAU_MODE_PWM_SLAVE;
-    TDR05 = _0640_TAU_TDR05_VALUE;
+    TDR05 = _2710_TAU_TDR05_VALUE;
     TOM0 |= _0020_TAU_CH5_SLAVE_OUTPUT;
     TOL0 &= (uint16_t)~_0020_TAU_CH5_OUTPUT_LEVEL_L;
     TO0 &= (uint16_t)~_0020_TAU_CH5_OUTPUT_VALUE_1;
@@ -108,7 +108,7 @@ void R_Config_TAU0_2_Create(void)
     /* Channel 6 is used as slave channel for PWM output function */
     TMR06 = _8000_TAU_CLOCK_SELECT_CKM1 | _0000_TAU_CLOCK_MODE_CKS | _0000_TAU_COMBINATION_SLAVE | 
             _0400_TAU_TRIGGER_MASTER_INT | _0009_TAU_MODE_PWM_SLAVE;
-    TDR06 = _0640_TAU_TDR06_VALUE;
+    TDR06 = _2710_TAU_TDR06_VALUE;
     TOM0 |= _0040_TAU_CH6_SLAVE_OUTPUT;
     TOL0 &= (uint16_t)~_0040_TAU_CH6_OUTPUT_LEVEL_L;
     TO0 &= (uint16_t)~_0040_TAU_CH6_OUTPUT_VALUE_1;
@@ -116,7 +116,7 @@ void R_Config_TAU0_2_Create(void)
     /* Channel 7 is used as slave channel for PWM output function */
     TMR07 = _8000_TAU_CLOCK_SELECT_CKM1 | _0000_TAU_CLOCK_MODE_CKS | _0000_TAU_COMBINATION_SLAVE | 
             _0400_TAU_TRIGGER_MASTER_INT | _0009_TAU_MODE_PWM_SLAVE;
-    TDR07 = _0640_TAU_TDR07_VALUE;
+    TDR07 = _2710_TAU_TDR07_VALUE;
     TOM0 |= _0080_TAU_CH7_SLAVE_OUTPUT;
     TOL0 &= (uint16_t)~_0080_TAU_CH7_OUTPUT_LEVEL_L;
     TO0 &= (uint16_t)~_0080_TAU_CH7_OUTPUT_VALUE_1;

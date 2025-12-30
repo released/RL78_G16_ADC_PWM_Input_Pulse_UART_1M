@@ -134,7 +134,7 @@ MD_STATUS drv_uart_send(drv_uart_ch_t *ch, const uint8_t *data, uint16_t len)
     ch->flags &= (uint8_t)~DRV_UART_FLAG_TX_DONE;
     ch->flags |= DRV_UART_FLAG_TX_BUSY;
 
-    ret = ch->send_fn((uint8_t * const)ch->tx_buf, len);
+    ret = ch->send_fn(ch->tx_buf, len);
     if (ret != MD_OK)
     {
         ch->tx_busy = 0U;
@@ -175,7 +175,7 @@ MD_STATUS drv_uart_rx_arm_1byte(drv_uart_ch_t *ch)
     {
         return MD_ERROR;
     }
-    return ch->recv_fn((uint8_t * const)&ch->rx_tmp, 1U);
+    return ch->recv_fn((uint8_t * )&ch->rx_tmp, 1U);
 }
 
 uint16_t drv_uart_rx_available(drv_uart_ch_t *ch)
@@ -286,12 +286,14 @@ void drv_uart_rx_log(const uint8_t *buf, uint16_t len)
         return;
     }
 
-    printf_tiny("UART:len=%u: ", (unsigned int)len);
+    // printf_tiny("UART:len=%u-", (unsigned int)len);
+    // printf_tiny("UART:");
 
     /* Hex bytes */
     for (i = 0U; i < len; i++)
     {
         printf_tiny("[%u]0x%02X", (unsigned int)i, (unsigned int)buf[i]);
+        // printf_tiny("%02Xh", (unsigned int)buf[i]);
 
         if (i != (len - 1U))
         {
@@ -310,6 +312,7 @@ void app_uart_rx_poll_and_dump(void)
     if (drv_uart_fetch_rx_overflow(&g_uart_ch2) != 0U)
     {
         /* overflow happened: increase ring size or read more frequently */
+        printf_tiny("rx_overflow\r\n");
     }
 
     n = drv_uart_read(&g_uart_ch2, buf, (uint16_t)sizeof(buf));
@@ -348,5 +351,3 @@ void app_uart_send_test_packet(void)
         /* MD_ERROR: config/binding issue */
     }
 }
-
-

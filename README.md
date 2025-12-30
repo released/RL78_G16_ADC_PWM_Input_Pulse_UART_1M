@@ -118,18 +118,74 @@ SLAVE channel TDR result will be different , ex : set to 100 % duty
 ![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/watch_pwm_out_2.jpg)
 
 
+when smart configurator , PWM OUT set 10K frequency
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/smc_pwm_output_10K.jpg)
+
+
+monitor P22/TO06 (duty fix at 60%)
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/scope_pwm_out_10KHz.jpg)
+
+
+when smart configurator , PWM OUT set 100Hz frequency
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/smc_pwm_output_100Hz.jpg)
+
+
+monitor P22/TO06 (duty fix at 60%)
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/scope_pwm_out_100Hz..jpg)
+
+
+when smart configurator , PWM OUT set 200Hz frequency
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/smc_pwm_output_200Hz.jpg)
+
+
+monitor P22/TO06 (duty fix at 60%)
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/scope_pwm_out_200Hz..jpg)
+
+
+
+
 7. below is PWM input capture log message , when enable below define in drv_pwm_input.h
 
 ```c
 // #define ENABLE_LOG_CAPTURE
 ```
 
+log : when receive 10KHz pulse
+
 ![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/log_pwm_input_1.jpg)
 
 
-when monitor result in watch window , 
+when monitor result in watch window (10KHz)
 
 
 ![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/watch_pwm_input_1.jpg)
+
+
+log : when receive 100Hz pulse
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/log_pwm_input_2.jpg)
+
+
+when monitor result in watch window (100Hz)
+
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/watch_pwm_input_2.jpg)
+
+
+log : when receive 200Hz pulse
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/log_pwm_input_3.jpg)
+
+
+when monitor result in watch window (200Hz)
+
+
+![image](https://github.com/released/RL78_G16_ADC_PWM_Input_Pulse_UART_1M/blob/main/watch_pwm_input_3.jpg)
 
 

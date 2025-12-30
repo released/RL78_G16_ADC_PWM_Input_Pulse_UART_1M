@@ -39,11 +39,11 @@ Macro definitions (Register bit)
 /***********************************************************************************************************************
 Macro definitions
 ***********************************************************************************************************************/
-#define _063F_TAU_TDR02_VALUE                              (0x063FU)    /* 16-bit timer data register 02 (TDR02) */
-#define _0640_TAU_TDR03_VALUE                              (0x0640U)    /* 16-bit timer data register 03 (TDR03) */
-#define _0640_TAU_TDR05_VALUE                              (0x0640U)    /* 16-bit timer data register 05 (TDR05) */
-#define _0640_TAU_TDR06_VALUE                              (0x0640U)    /* 16-bit timer data register 06 (TDR06) */
-#define _0640_TAU_TDR07_VALUE                              (0x0640U)    /* 16-bit timer data register 07 (TDR07) */
+#define _270F_TAU_TDR02_VALUE                              (0x270FU)    /* 16-bit timer data register 02 (TDR02) */
+#define _2710_TAU_TDR03_VALUE                              (0x2710U)    /* 16-bit timer data register 03 (TDR03) */
+#define _2710_TAU_TDR05_VALUE                              (0x2710U)    /* 16-bit timer data register 05 (TDR05) */
+#define _2710_TAU_TDR06_VALUE                              (0x2710U)    /* 16-bit timer data register 06 (TDR06) */
+#define _2710_TAU_TDR07_VALUE                              (0x2710U)    /* 16-bit timer data register 07 (TDR07) */
 
 /***********************************************************************************************************************
 Typedef definitions

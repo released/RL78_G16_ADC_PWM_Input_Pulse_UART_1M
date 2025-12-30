@@ -97,7 +97,7 @@ void task_10ms(void *user_data)
     breath_process();
     pwm_sweep_process();
 
-    app_uart_rx_poll_and_dump();
+    // app_uart_rx_poll_and_dump();
 }
 
 void task_50ms(void *user_data)
@@ -108,14 +108,12 @@ void task_100ms(void *user_data)
 {
     drv_adc_process_poll();
     app_uart_send_test_packet();
-
 }
 
 void task_1000ms(void *user_data)
 {
     drv_pwm_input_log();
-    drv_adc_process_log();
-    
+    drv_adc_process_log();    
 }
 
 void TimerService_CreateTask(void)
@@ -160,6 +158,7 @@ void loop(void)
 
     // drv period    
     drv_pwm_input_poll();
+    app_uart_rx_poll_and_dump();
 }
 
 
@@ -372,7 +371,6 @@ void hardware_init(void)
         P22/TO06
         P121/TO07
     */
-
     R_Config_TAU0_2_Start();   
 
     /*
@@ -391,8 +389,7 @@ void hardware_init(void)
     /*
         PWM capture
         P23/TI04
-    */ 
-    drv_pwm_input_set_clock_hz(16000000UL);
+    */
     drv_pwm_input_init();
 
     /*

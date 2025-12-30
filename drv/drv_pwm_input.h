@@ -40,7 +40,9 @@ typedef struct
 
     volatile unsigned short duty_x10;     	/* 0.1% unit, 0..1000 */
     volatile unsigned long freq_hz;       	/* optional, need timer clock */
-    volatile unsigned long clk_hz;       	/* optional, capture counter clock in Hz */
+
+    volatile unsigned long fclk_hz;        /* system fCLK in Hz (e.g. 16000000) */
+    volatile unsigned long cap_clk_hz;     /* capture timer clock in Hz (after prescaler) */
 
     volatile unsigned char high_done;
     volatile unsigned char low_done;
@@ -53,8 +55,15 @@ typedef struct
 
 /*_____ F U N C T I O N S __________________________________________________*/
 
+/* Set system fCLK (default can be 16000000). */
+void drv_pwm_input_set_fclk_hz(unsigned long fclk_hz);
+
+/* Auto detect capture clock from TMR04/TPS0. Call after TAU init, and if TPS0 changes. */
+void drv_pwm_input_update_capture_clk_from_hw(void);
+
+unsigned long drv_pwm_input_get_capture_clk_hz(void);
+
 void drv_pwm_input_clear(void);
-void drv_pwm_input_set_clock_hz(unsigned long clk_hz);
 void drv_pwm_input_init(void);
 void drv_pwm_input_log(void);
 void drv_pwm_input_irq_handler(void);     /* call in TAU capture ISR */

@@ -12,7 +12,7 @@
 #define PWM_IN_MEASURE_START()                          (R_Config_TAU0_4_Start())
 #define PWM_IN_MEASURE_STOP()                           (R_Config_TAU0_4_Stop())
 #define PWM_IN_IRQ_FLAG                                 (TMIF04)
-#define PWM_IN_DEFAULT_CLK_HZ                           (16000000UL)
+#define PWM_IN_DEFAULT_FCLK_HZ                          (16000000UL)
 
 volatile pwm_capture_state_t g_pwcap;
 
@@ -26,14 +26,19 @@ extern volatile uint32_t g_tau0_ch4_width;
 
 void drv_pwm_input_clear(void)
 {
+    /* Clear measurement results */
     g_pwcap.high_cnt = 0UL;
     g_pwcap.low_cnt = 0UL;
     g_pwcap.total_cnt = 0UL;
+
     g_pwcap.duty_x10 = 0U;
     g_pwcap.freq_hz = 0UL;
 
-    g_pwcap.clk_hz = PWM_IN_DEFAULT_CLK_HZ; /* default */
+    /* Clock defaults */
+    g_pwcap.fclk_hz    = PWM_IN_DEFAULT_FCLK_HZ; /* system fCLK */
+    g_pwcap.cap_clk_hz = 0UL;                    /* will be updated from TPS0/TMR04 */
 
+    /* Clear status flags */
     g_pwcap.high_done = 0U;
     g_pwcap.low_done = 0U;
     g_pwcap.calc_ready = 0U;
@@ -42,23 +47,90 @@ void drv_pwm_input_clear(void)
     s_invalid_cnt = 0U;
 }
 
-/*
-    check in smart configurator , input pulse measurement , CLOCK SOURCE
-*/
-void drv_pwm_input_set_clock_hz(unsigned long clk_hz)
+static unsigned long pwm_in_calc_cap_clk_hz(unsigned long fclk_hz)
 {
-    /* Reject 0 to avoid divide-by-zero */
-    if (clk_hz == 0UL)
+    unsigned short tmr;
+    unsigned short tps;
+    unsigned short ckm_sel;
+    unsigned short prs;
+    unsigned short shift;
+    unsigned long div;
+
+    tmr = TMR04;
+    tps = TPS0;
+
+    /* CKS[15:14]: 00=CKM0, 01=CKM2, 10=CKM1, 11=CKM3
+       In r_cg_tau.h:
+       _0000 CKS=CKM0, _8000=CKM1, _4000=CKM2, _C000=CKM3
+       -> ckm_sel mapping: 0..3 by raw bits works with nibble extraction below if you map correctly.
+    */
+    ckm_sel = (unsigned short)((tmr >> 14) & 0x0003U);
+
+    /* TPS0 layout is 4-bit per CKM:
+       CKM0: bits[3:0], CKM1: [7:4], CKM2: [11:8], CKM3: [15:12]
+     */
+    shift = (unsigned short)(ckm_sel * 4U);
+    prs   = (unsigned short)((tps >> shift) & 0x000FU);
+
+    if (prs >= 16U)
     {
-        return;
+        return 0UL;
     }
 
-    g_pwcap.clk_hz = clk_hz;
+    div = (1UL << (unsigned long)prs);
+    if (div == 0UL)
+    {
+        return 0UL;
+    }
+
+    return (unsigned long)(fclk_hz / div);
 }
 
-void drv_pwm_input_init(void)
+void drv_pwm_input_set_fclk_hz(unsigned long fclk_hz)
 {
+    if (fclk_hz == 0UL)
+    {
+        fclk_hz = PWM_IN_DEFAULT_FCLK_HZ;
+    }
+
+    g_pwcap.fclk_hz = fclk_hz;
+}
+
+void drv_pwm_input_update_capture_clk_from_hw(void)
+{
+    unsigned long fclk;
+
+    fclk = g_pwcap.fclk_hz;
+    if (fclk == 0UL)
+    {
+        fclk = PWM_IN_DEFAULT_FCLK_HZ;
+        g_pwcap.fclk_hz = fclk;
+    }
+
+    g_pwcap.cap_clk_hz = pwm_in_calc_cap_clk_hz(fclk);
+}
+
+unsigned long drv_pwm_input_get_capture_clk_hz(void)
+{
+    return g_pwcap.cap_clk_hz;
+}
+
+
+void drv_pwm_input_init(void)
+{    
+    unsigned long cap_clk_hz = 0;
     drv_pwm_input_clear();
+
+    /* default fCLK */
+    drv_pwm_input_set_fclk_hz(PWM_IN_DEFAULT_FCLK_HZ);
+
+    /* TAU already configured by Smart Config; then read registers to get real capture clock */
+    drv_pwm_input_update_capture_clk_from_hw();
+
+    cap_clk_hz = drv_pwm_input_get_capture_clk_hz();
+    
+    printf_tiny("pwm input clock:%lu,\r\n",cap_clk_hz);
+
     PWM_IN_MEASURE_START();
 }
 
@@ -143,7 +215,7 @@ void drv_pwm_input_poll(void)
             }
 
             /* freq_hz = round(clk / total_cnt) */
-            clk = g_pwcap.clk_hz;
+            clk = g_pwcap.cap_clk_hz;
             if (clk != 0UL)
             {
                 g_pwcap.freq_hz = (clk + (total / 2UL)) / total;

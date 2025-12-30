@@ -122,7 +122,7 @@
         <Item bank="0" id="SAU1_INTST2" priority="3"/>
         <Item bank="0" id="SAU1_INTCSI20" priority="3"/>
         <Item bank="0" id="SAU1_INTIIC20" priority="3"/>
-        <Item bank="0" id="SAU1_INTSR2" priority="3"/>
+        <Item bank="0" id="SAU1_INTSR2" priority="0"/>
         <Item bank="0" id="SAU1_INTSRE2" priority="3"/>
         <Item bank="0" id="TAU0_INTTM03H" priority="3"/>
         <Item bank="0" id="IICA0_INTIICA0" priority="3"/>
@@ -564,7 +564,7 @@
             <allocatable id="TAU0">
                 <allocatable id="Slave3">
                     <option enabled="true" id="dutyvalue" selection="dutyvalue">
-                        <item id="dutyvalue" input="100" vlaue="1600"/>
+                        <item id="dutyvalue" input="100" vlaue="10000"/>
                     </option>
                     <option enabled="true" id="salveoutputinitial" selection="outputinitial0">
                         <item id="outputinitial0" input="" vlaue="0"/>
@@ -587,7 +587,7 @@
                 </allocatable>
                 <allocatable id="Slave5">
                     <option enabled="true" id="dutyvalue" selection="dutyvalue">
-                        <item id="dutyvalue" input="100" vlaue="1600"/>
+                        <item id="dutyvalue" input="100" vlaue="10000"/>
                     </option>
                     <option enabled="true" id="salveoutputinitial" selection="outputinitial0">
                         <item id="outputinitial0" input="" vlaue="0"/>
@@ -610,7 +610,7 @@
                 </allocatable>
                 <allocatable id="Slave6">
                     <option enabled="true" id="dutyvalue" selection="dutyvalue">
-                        <item id="dutyvalue" input="100" vlaue="1600"/>
+                        <item id="dutyvalue" input="100" vlaue="10000"/>
                     </option>
                     <option enabled="true" id="salveoutputinitial" selection="outputinitial0">
                         <item id="outputinitial0" input="" vlaue="0"/>
@@ -633,7 +633,7 @@
                 </allocatable>
                 <allocatable id="Slave7">
                     <option enabled="true" id="dutyvalue" selection="dutyvalue">
-                        <item id="dutyvalue" input="100" vlaue="1600"/>
+                        <item id="dutyvalue" input="100" vlaue="10000"/>
                     </option>
                     <option enabled="true" id="salveoutputinitial" selection="outputinitial0">
                         <item id="outputinitial0" input="" vlaue="0"/>
@@ -659,7 +659,7 @@
                     <item id="CK0" input="" vlaue="0"/>
                     <item id="CK1" input="" vlaue="0"/>
                 </option>
-                <option enabled="true" id="Prescaler" selection="FCLK1">
+                <option enabled="true" id="Prescaler" selection="FCLK16">
                     <item id="FCLK1" input="1" vlaue="0"/>
                     <item id="FCLK2" input="2" vlaue="0"/>
                     <item id="FCLK4" input="4" vlaue="0"/>
@@ -678,9 +678,9 @@
                     <item id="FCLK32768" input="32768" vlaue="0"/>
                 </option>
                 <option enabled="true" id="IntervalValue" selection="IntervalValue">
-                    <item id="IntervalValue" input="100" vlaue="1599"/>
+                    <item id="IntervalValue" input="10" vlaue="9999"/>
                 </option>
-                <option enabled="true" id="IntervalUnit" selection="us">
+                <option enabled="true" id="IntervalUnit" selection="ms">
                     <item id="ms" input="" vlaue="0"/>
                     <item id="us" input="" vlaue="0"/>
                     <item id="ns" input="" vlaue="0"/>
@@ -919,7 +919,7 @@
                         <item id="153600" input="153600" vlaue="0"/>
                         <item id="312500" input="312500" vlaue="0"/>
                     </option>
-                    <option enabled="true" id="rxPriority" selection="Level3">
+                    <option enabled="true" id="rxPriority" selection="Level0">
                         <item id="Level0" input="" vlaue="0"/>
                         <item id="Level1" input="" vlaue="0"/>
                         <item id="Level2" input="" vlaue="0"/>
