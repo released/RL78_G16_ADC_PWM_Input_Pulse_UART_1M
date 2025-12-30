@@ -2265,7 +2265,7 @@ src\smc_gen\r_config
       <DebuggerProperty-EssentialProperty-Flash-IdCode-Code9>0</DebuggerProperty-EssentialProperty-Flash-IdCode-Code9>
       <DebuggerProperty-EssentialProperty-Flash-PermitFlashProgramming>Yes</DebuggerProperty-EssentialProperty-Flash-PermitFlashProgramming>
       <DebuggerProperty-EssentialProperty-Flash-ForceEraseChip>No</DebuggerProperty-EssentialProperty-Flash-ForceEraseChip>
-      <DebuggerProperty-EssentialProperty-Clock-MainClockForOCD>0</DebuggerProperty-EssentialProperty-Clock-MainClockForOCD>
+      <DebuggerProperty-EssentialProperty-Clock-MainClockForOCD>16000</DebuggerProperty-EssentialProperty-Clock-MainClockForOCD>
       <DebuggerProperty-EssentialProperty-Clock-SubClockForOCD>0</DebuggerProperty-EssentialProperty-Clock-SubClockForOCD>
       <DebuggerProperty-EssentialProperty-Clock-MonitorClock>System</DebuggerProperty-EssentialProperty-Clock-MonitorClock>
       <DebuggerProperty-EssentialProperty-TargetConnect-TargetSupplyPower>No</DebuggerProperty-EssentialProperty-TargetConnect-TargetSupplyPower>
@@ -2327,6 +2327,7 @@ src\smc_gen\r_config
       <DebuggerProperty-HookProperty-HookTransaction-Broke-Length>0</DebuggerProperty-HookProperty-HookTransaction-Broke-Length>
       <DebuggerProperty-HookProperty-HookTransaction-Connected-Length>0</DebuggerProperty-HookProperty-HookTransaction-Connected-Length>
       <DebuggerProperty-HookProperty-HookTransaction-Disconnecting-Length>0</DebuggerProperty-HookProperty-HookTransaction-Disconnecting-Length>
+      <DebuggerProperty-EssentialProperty-EmulatorConnect-SerialNumber />
     </Instance>
   </Class>
   <Class Guid="100f3761-3d7e-4559-b1d8-375a0c7bf682">

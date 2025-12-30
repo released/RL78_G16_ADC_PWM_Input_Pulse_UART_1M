@@ -325,7 +325,7 @@ void app_uart_rx_poll_and_dump(void)
 
 void app_uart_send_test_packet(void)
 {
-    static uint8_t counter = 0U;
+    static uint32_t counter = 0U;
     uint8_t pkt[UART_TEST_PKT_LEN];
     uint8_t i;
     MD_STATUS ret;
@@ -338,7 +338,11 @@ void app_uart_send_test_packet(void)
         pkt[i] = (uint8_t)(i + 0x10U);
     }
 
-    pkt[UART_TEST_PKT_LEN - 1U] = counter;
+    /* Counter (4 bytes) at tail: [len-4 .. len-1] */
+    pkt[UART_TEST_PKT_LEN - 4U] = (uint8_t)((counter >> 24)  & 0xFFUL);
+    pkt[UART_TEST_PKT_LEN - 3U] = (uint8_t)((counter >> 16)  & 0xFFUL);
+    pkt[UART_TEST_PKT_LEN - 2U] = (uint8_t)((counter >> 8) & 0xFFUL);
+    pkt[UART_TEST_PKT_LEN - 1U] = (uint8_t)((counter >> 0) & 0xFFUL);
 
     ret = drv_uart_send(&g_uart_ch2, pkt, UART_TEST_PKT_LEN);
     if (ret == MD_OK)

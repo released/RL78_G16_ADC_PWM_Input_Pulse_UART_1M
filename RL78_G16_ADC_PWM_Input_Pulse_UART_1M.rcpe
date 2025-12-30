@@ -127,7 +127,7 @@
     </Files>
     <DebugOptions>
       <ConnectSettings>
-        <MainClock>0</MainClock>
+        <MainClock>16000000</MainClock>
       </ConnectSettings>
       <DebugToolSettings />
     </DebugOptions>
